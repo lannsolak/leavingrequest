@@ -25,7 +25,7 @@ class Controllers {
 	}
 	
 	public function helper($name){
-		require(MAIN_DIR .'system/libs/'. strtolower($name) .'.php');
+		require(MAIN_DIR .'system/libs/helper_'. strtolower($name) .'.php');
 		$helper = new $name;
 		return $helper;
 	}

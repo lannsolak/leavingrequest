@@ -2,15 +2,13 @@
 
 class Views {
 
-	private $page_variables = array();
-
 	public function render($source, $data = ''){
 
-		if($data){
+		if($data != ""){
 
-			$this->$page_variables = $data;
+			$page_variables = $data;
 		
-			extract($this->$page_variables);
+			extract($page_variables);
 
 		}
 
