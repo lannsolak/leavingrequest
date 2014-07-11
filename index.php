@@ -20,6 +20,7 @@ require(MAIN_DIR .'system/error.php');
 
 global $config;
 // Define base URL
+
 define('BASE_URL', $config['base_url']);
 
 core();

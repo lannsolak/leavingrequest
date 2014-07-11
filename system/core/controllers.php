@@ -4,6 +4,7 @@ class Controllers {
 	
 	var $view;
 	var $model;
+	var $helper;
 
 	public function __construct(){
 		$this->view();
@@ -26,8 +27,9 @@ class Controllers {
 	
 	public function helper($name){
 		require(MAIN_DIR .'system/libs/helper_'. strtolower($name) .'.php');
+		$name = 'Helper_'.$name;
 		$helper = new $name;
-		return $helper;
+		$this->helper = $helper;
 	}
 	
 	public function redirect($loc)	{

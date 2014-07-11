@@ -38,20 +38,23 @@ function core(){
 
 	} else {
 
-        $controller = $config['error_controller'];
+        // $controller = $config['error_controller'];
 
-        require_once(PROCESS_DIR . 'controllers/' . $controller . '.php');
+        // require_once(PROCESS_DIR . 'controllers/' . $controller . '.php');
+        
+        error404(); exit();
 
 	}
 
     // Check the method exists
     if(!method_exists($controller, $action)){
 
-        $controller = $config['error_controller'];
+        // $controller = $config['error_controller'];
 
-        require_once(PROCESS_DIR . 'controllers/' . $controller . '.php');
+        // require_once(PROCESS_DIR . 'controllers/' . $controller . '.php');
 
-        $action = 'index';
+        // $action = 'index';
+        error404(); exit();
 
     }
 	
@@ -59,6 +62,28 @@ function core(){
 	$obj = new $controller;
 
     die(call_user_func_array(array($obj, $action), array_slice($segments, 2)));
+
+}
+
+
+function segment($seg){
+
+	if(!is_int($seg)) return false;
+
+	// Get request url and script url
+	$request_url = (isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : '';
+	$script_url  = (isset($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : '';
+
+	$script_url  = strtolower($script_url);
+	$request_url  = strtolower($request_url);
+	
+	// Get our url path and trim the / of the left and the right, (get the url segement).
+	if($request_url != $script_url) $url = trim(preg_replace('/'. str_replace('/', '\/', str_replace('index.php', '', $script_url)) .'/', '', $request_url, 1), '/');
+
+	// Split the url into segments
+	$parts = explode('/', $url);
+
+    return isset($parts[$seg]) ? $parts[$seg] : false;
 
 }
 

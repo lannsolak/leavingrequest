@@ -1,7 +1,7 @@
 <?php 
 
 // Base URL including trailing slash (e.g. http://localhost/)
-$config['base_url'] = 'http://localhost/ME/frameworkme/LEAVEREQUEST/';
+$config['base_url'] = 'http://localhost/ME/frameworkme/leavingrequest/';
 
 // Default controller to load
 // Controller used for errors (e.g. 404, 500 etc)

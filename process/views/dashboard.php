@@ -1,9 +1,15 @@
-<?php 
-	include('header.php'); 
+<?php include_once("header.php"); ?>
 
-	if($hello){
-		echo $hello;
-	}
+<div id="wrapper"> 
 
-	include('footer.php'); 
-?>
+        <?php 
+
+        	include_once("file/topside.php");
+
+        	include_once("file/".segment(0)."/".segment(0).".php");
+
+        ?>        
+
+</div>
+
+<?php include_once("footer.php"); ?>
