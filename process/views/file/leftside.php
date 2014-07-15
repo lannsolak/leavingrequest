@@ -1,5 +1,5 @@
 
-    <div class="navbar-default navbar-static-side" role="navigation">
+    <!-- <div class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
                 <li class="sidebar-search">
@@ -29,4 +29,4 @@
                 </li>                
             </ul>
         </div>
-    </div>
+    </div> -->

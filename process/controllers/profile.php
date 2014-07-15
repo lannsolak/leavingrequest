@@ -24,9 +24,15 @@ class Profile extends Controllers {
 
 	public function profile($userId = false){
 
-		if($userId == false && $this->helper->get_session('userId')){
+		if($this->helper->get_session('userId')){
 
 			$userId = $this->helper->get_session('userId');
+
+		}else{
+
+			error404();
+
+			exit();
 
 		}
 
@@ -39,6 +45,8 @@ class Profile extends Controllers {
 		}
 
 		$data['profile'] = $this->model->getProfile($userId);
+
+		$data['OwnLeave'] = $this->model->getOwnLeave($userId);
 
 		$this->view->render('dashboard', $data);
 
