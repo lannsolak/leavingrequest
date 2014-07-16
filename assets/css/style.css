@@ -1,1 +1,13 @@
 /* CSS Styles */
+
+.cursor{
+
+	cursor: pointer;
+
+}
+
+.cursor:hover{
+
+	color:blue;
+
+}

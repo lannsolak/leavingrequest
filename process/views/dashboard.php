@@ -8,7 +8,13 @@
 
         	include_once("file/".segment(0)."/".segment(0).".php");
 
-        ?>        
+        ?>
+        
+        <?php 
+
+			echo include_once('modal/department.php');
+
+		?>        
 
 </div>
 

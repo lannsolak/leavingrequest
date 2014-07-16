@@ -36,6 +36,30 @@ class Request extends Controllers {
 
 		}
 
+		if($this->helper->get_session('add_department')){
+
+			$data['add_department'] = $this->helper->get_session('add_department');
+
+			unset($_SESSION['add_department']);
+
+		}
+
+		if($this->helper->get_session('edit_department')){
+
+			$data['edit_department'] = $this->helper->get_session('edit_department');
+
+			unset($_SESSION['edit_department']);
+
+		}
+
+		if($this->helper->get_session('delete_department')){
+
+			$data['delete_department'] = $this->helper->get_session('delete_department');
+
+			unset($_SESSION['delete_department']);
+
+		}
+
 		$this->view->render('dashboard', $data);
 
 	}
@@ -197,6 +221,75 @@ class Request extends Controllers {
 		}else{
 
 			$this->helper->set_the_session('status', 'fail');
+
+		}
+
+		$this->redirect('request');
+
+	}
+
+
+	//  department section
+
+	public function addDept(){
+
+		$deptmentTitle = $_REQUEST['deptTitle'];
+
+		$result = $this->model->createDepartment($deptmentTitle);
+
+		if($result){
+
+			$this->helper->set_the_session('add_department', 'success');
+
+		}else{
+
+			$this->helper->set_the_session('add_department', 'fail');
+
+		}
+
+		$this->redirect('request');
+
+	}
+
+	public function editDept(){
+
+		$deptmentTitle = $_REQUEST['deptTitle'];
+
+		$deptmentID = $_REQUEST['deptID'];
+
+		$result = $this->model->updateDepartment($deptmentTitle, $deptmentID);
+
+		if($result > 0){
+
+			$this->helper->set_the_session('edit_department', 'success');
+
+		}else if($result == 0){
+
+			$this->helper->set_the_session('edit_department', 'nochange');
+
+		}else{
+
+			$this->helper->set_the_session('edit_department', 'fail');
+
+		}
+
+		$this->redirect('request');
+
+	}
+
+	public function deleteDept(){
+
+		$deptmentID = segment(2);
+
+		$result = $this->model->deleteDepartment($deptmentID);
+
+		if($result > 0){
+
+			$this->helper->set_the_session('delete_department', 'success');
+
+		}else{
+
+			$this->helper->set_the_session('delete_department', 'fail');
 
 		}
 

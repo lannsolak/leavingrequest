@@ -144,6 +144,36 @@ class Requestmod extends Models{
 
 	}
 
+	public function createDepartment($deptmentTitle){
+
+		$sql = "INSERT INTO tbl_department (dept_title) VALUES ('".$deptmentTitle."')";
+
+		$this->execute($sql);
+
+		return mysql_insert_id();
+
+	}
+
+	public function updateDepartment($deptmentTitle, $deptmentID){
+
+		$update = "UPDATE tbl_department SET dept_title='%s' WHERE dept_id='%s'";
+
+		$record = $this->execute(sprintf($update, $deptmentTitle, $deptmentID));
+
+		return  mysql_affected_rows();
+
+	}
+
+	public function deleteDepartment($deptmentID){
+
+		$update = "UPDATE tbl_department SET dept_deleted=1 WHERE dept_id='%s'";
+
+		$record = $this->execute(sprintf($update, $deptmentID));
+
+		return  mysql_affected_rows();
+
+	}
+
 }
 
 ?>

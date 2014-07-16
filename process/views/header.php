@@ -16,6 +16,7 @@
     <!-- SB Admin CSS - Include with every page -->
     <link href="<?php echo BASE_URL; ?>assets/css/sb-admin.css" rel="stylesheet">
     <link href="<?php echo BASE_URL; ?>assets/css/datepicker.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>assets/css/style.css" rel="stylesheet">
 
 </head>    
 

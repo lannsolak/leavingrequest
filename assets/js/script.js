@@ -49,14 +49,87 @@ jQuery(function(){
         }
 	});
 
-    // check all checkbox
-    jQuery(".hcheckbox").bind("click", function(){
-        if(jQuery(this).is( ":checked" )){
-            jQuery(".tdcheckbox").prop('checked', true);
-        }else{
-            jQuery(".tdcheckbox").prop('checked', false);           
+    // function to validation specail charactor
+
+    jQuery('.btnSaveDept, .btnUpdateDept').bind('click', function(){
+
+        var text = jQuery('.deptTitle').val();
+
+        if(!specialcharactor(text)){
+
+            alert("The department title is require, 50 length was limited and not allow specail charactor...");
+
+            return false;
+
         }
+
     });
+
+    jQuery('.dept-edit').bind('click', function(){
+
+        var deptID = jQuery(this).attr('data-id');
+
+        var deptTitle = jQuery(this).attr('data-title');
+
+        jQuery('.deptEditTitle').val(deptTitle);
+
+        jQuery('.deptIDhidden').val(deptID);
+
+    });
+
+    jQuery('.deptdelete').bind('click', function(){
+
+        if(!confirm("Are you sure to delete th record?")){
+            
+            return false;
+        
+        }
+
+    });
+
+    function specialcharactor(text){
+
+        if(text != ""){
+
+            if (/[^a-zA-Z 0-9]+/.test(text)){
+
+                return false;
+                
+            }else if(text.length > 70){
+
+                return false;
+
+            }else{
+
+                return true;
+
+            }
+
+
+        }else{
+
+            return false;
+
+        }
+
+    }
+
+    // check all checkbox
+
+    jQuery(".hcheckbox").bind("click", function(){
+
+        if(jQuery(this).is( ":checked" )){
+
+            jQuery(".tdcheckbox").prop('checked', true);
+
+        }else{
+
+            jQuery(".tdcheckbox").prop('checked', false);   
+
+        }
+
+    });
+
 
 	// Bootstrap datepicker 
 
