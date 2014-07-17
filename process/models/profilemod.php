@@ -22,6 +22,8 @@ class Profilemod extends Models {
 
 	}
 
+	// still have some thing wrong
+
 	public function getOwnLeave($usrId){
 
 		$sql = "SELECT * FROM tbl_request

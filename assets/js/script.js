@@ -2,7 +2,7 @@ jQuery(function(){
 
 	// my general script
 
-	// $("#search-form").attr("action", "/search/" + action); 
+	// append the action to  form request in list
 
     jQuery('.rq-view, .rq-edit').bind('click', function(){
         var action = jQuery(this).attr('data-action');
@@ -16,6 +16,8 @@ jQuery(function(){
             return false;
         }
     });
+
+    // delete append action in list request
 
     jQuery('.rq-deleted').bind('click', function(){
         var action = jQuery(this).attr('data-action');
@@ -48,6 +50,40 @@ jQuery(function(){
             return false;
         }
 	});
+
+
+    // edit, delete append in list employee
+
+    jQuery('.em-edit, .em-view').bind('click', function(){
+        var action = jQuery(this).attr('data-action');
+        var formact = jQuery('.frm-action').attr('action');
+        var appendactoin = jQuery('.frm-action').attr('action', formact+action);
+        var checkboxlength = jQuery('.tdcheckbox:checked').length;
+        if(checkboxlength > 0){            
+          jQuery('.em-frm-action').submit();
+        }else{
+            alert("Please choose any checkbox in the list record before continue action...");
+            return false;
+        }
+    });
+
+    // delete append action in list department
+
+    jQuery('.em-deleted').bind('click', function(){
+        var action = jQuery(this).attr('data-action');
+        var formact = jQuery('.frm-action').attr('action');
+        var appendactoin = jQuery('.frm-action').attr('action', formact+action);
+        var checkboxlength = jQuery('.tdcheckbox:checked').length;
+        if(checkboxlength > 0){
+          if(confirm("Are you sure to delete the employees?")){
+                jQuery('.em-frm-action').submit();
+            }
+        }else{
+            alert("Please choose any checkbox in the list record before continue action...");
+            return false;
+        }
+    });
+    
 
     // function to validation specail charactor
 

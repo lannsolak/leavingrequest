@@ -12,7 +12,7 @@
         
         <?php 
 
-			echo include_once('modal/department.php');
+			include_once('modal/department.php');
 
 		?>        
 

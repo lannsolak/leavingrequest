@@ -10,7 +10,7 @@
                         <i class="fa fa-files-o fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a> 
                     <ul class="dropdown-menu dropdown-page">
-                        <li><a href="<?php echo BASE_URL; ?>user"><i class="fa fa-user fa-fw"></i> User</a></li>
+                        <li><a href="<?php echo BASE_URL; ?>employee"><i class="fa fa-user fa-fw"></i> Employee</a></li>
                         <li class="divider"></li>
                         <li><a href="<?php echo BASE_URL; ?>request"><i class="fa fa-files-o fa-fw"></i> Take Leave & Department</a></li>
                         <li class="divider"></li>
