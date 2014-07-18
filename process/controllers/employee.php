@@ -20,6 +20,14 @@ class Employee extends Controllers{
 
 		$data['emInDepartment'] = $this->model->getAmountOfEmployeeInDept($usrID);
 
+		if($this->helper->get_session('delete')){
+
+			$data['deleted'] = $this->helper->get_session('delete');
+
+			unset($_SESSION['delete']);
+
+		}
+
 		$this->view->render('dashboard', $data);
 
 	}
@@ -72,7 +80,126 @@ class Employee extends Controllers{
 
 	}
 
-	// function to check upload file
+	public function modify(){
+
+		$usrID = $this->helper->get_session("userId");
+
+		$data['emInDepartment'] = $this->model->getAmountOfEmployeeInDept($usrID);
+
+		$data['em_department'] = $this->model->getDepartment();
+
+		$data['em_ordinator'] = $this->model->getOrdinator();
+
+		$data['em_role'] = $this->model->getRole();
+
+		$em_id = false;
+
+		if(isset($_REQUEST['tdcheckbox'])){ $em_id = $_REQUEST['tdcheckbox']; }elseif(isset($_REQUEST['em_id'])){ $em_id = array($_REQUEST['em_id']); }
+		
+		$data['em_modiryem'] = $this->model->getEmployeeModify($em_id);
+
+		if(isset($_REQUEST['btnModifyEmployee'])){
+
+			$vem = $this->validateEmployee();
+
+			if( $vem[0]['emfname'] && $vem[0]['emlname'] && $vem[0]['txtdob'] && $vem[0]['txtcountry'] && $vem[0]['txtcity'] && $vem[0]['txtphone'] && $vem[0]['emDepartment'] && $vem[0]['txtaddress'] && $vem[0]['txtemail']){
+
+				$filename = "";
+
+				if(is_uploaded_file($_FILES['picProfile']['tmp_name'])){
+
+					$upload = $this->uploadimage();
+
+					if($upload[2]['status'] == false){
+
+						$data['error'] = $upload[1];
+
+						$filename = $_REQUEST['oldpic'];
+
+					}else{
+
+						$filename = $upload[0]['filename'];
+
+					}
+
+				}else{
+
+					$filename = $_REQUEST['oldpic'];					
+
+				}
+
+				$emID = $_REQUEST['em_id'];
+
+				$emresult = $this->model->updateEmployee($_REQUEST, $filename, $emID);
+
+				$rudresult = $this->model->updateRud($_REQUEST['emDepartment'], $_REQUEST['emRole'], $emID);
+
+				if($emresult OR $rudresult){
+					$data['successModifyEmployee'] = "The employee was updated successfully...";
+					$data['em_modiryem'] = $this->model->getEmployeeModify($em_id);
+				}elseif($emresult == 0 && $rudresult == 0){
+					$data['nochangeModifyEmployee'] = "Nothing to update because there is not records was modified...";
+				}
+
+			}else{
+
+				$data['error'] = $vem[1];
+
+			}
+
+		}
+
+		$this->view->render('dashboard', $data);
+
+	}
+
+	public function detail(){
+
+		$usrID = $this->helper->get_session("userId");
+
+		$data['emInDepartment'] = $this->model->getAmountOfEmployeeInDept($usrID);
+
+		$wherein = $_REQUEST['tdcheckbox'];
+
+		if($wherein != false){
+
+			$data['selectEmployeedetail'] = $this->model->getDetail($wherein);
+
+		}else{
+
+			$data['error'] = "You don't have any selected records.";
+
+			$this->redirect('employee');
+
+		}
+
+		$this->view->render('dashboard', $data);
+
+	}
+
+	// Delete function
+
+	public function delete(){
+
+		$em_id = false;
+
+		if(isset($_REQUEST['tdcheckbox'])){ $em_id = $_REQUEST['tdcheckbox']; }
+
+		$result = $this->model->deleteEmployee($em_id);
+
+		if($result){
+
+			$this->helper->set_the_session('delete', 'success');
+
+		}else{
+
+			$this->helper->set_the_session('delete', 'fail');
+
+		}
+
+		$this->redirect('employee');
+
+	}
 
 	// function to validate form add new employee
 
@@ -237,6 +364,8 @@ class Employee extends Controllers{
 
 
 	}
+
+	// function to check upload file
 
 	public function uploadimage(){
 

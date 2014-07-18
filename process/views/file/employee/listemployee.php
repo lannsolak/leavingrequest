@@ -58,7 +58,6 @@
                         }                   
                     ?>
 
-                                 <!-- <i class="fa fa-times"> | -->
                 </tbody>
             </table>
         </div>

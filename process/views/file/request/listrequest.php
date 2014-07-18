@@ -67,7 +67,7 @@
                                 <td><?php echo $ol->request_subject; ?></td>
                                 <td><?php echo $ol->calendar_fromdate; ?></td>
                                 <td><?php echo $ol->calendar_todate; ?></td>
-                                <td><?php echo $ol->request_message; ?></td>
+                                <td><?php echo characterLimite($ol->request_message, 10); ?></td>
                                 <td><?php echo $ol->request_approvedate; ?></td>
                                 <td><?php echo $ol->approvebyname; ?></td>
                                 <td>

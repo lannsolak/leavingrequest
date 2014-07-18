@@ -16,7 +16,7 @@
 	    </div>
 	    <div id="collapse<?php echo $slrqdetail->request_id; ?>" class="panel-collapse collapse <?php echo $cl; ?>">
 	      <div class="panel-body">
-	      <!-- <div class="table-responsive"> -->
+	      <div class="table-responsive">
 	       	<table class="table table-hover">
 		    	<tbody>
 					<tr>
@@ -64,7 +64,7 @@
 				 </tbody>
 				</table>
 			</div>
-		  <!-- </div> -->
+		  </div>
 	    </div>
 	</div>
 <?php 

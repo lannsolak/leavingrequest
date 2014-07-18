@@ -57,7 +57,7 @@
 
 	<div class="col-lg-6">
 	    <div class="form-group">
-	        <label>Role: </label>
+	        <label>Role: <span class="require"> *</span></label>
 	        <select class="form-control emRole" name="emRole">
 	        	<option value="">--- select ---</option>
 	        	<?php 

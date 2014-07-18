@@ -17,3 +17,10 @@
 	color:red;
 
 }
+.table-responsive {
+
+    margin-bottom: none !important;
+
+    border: none !important;
+    
+}

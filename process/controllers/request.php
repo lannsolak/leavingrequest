@@ -70,6 +70,8 @@ class Request extends Controllers {
 
 		$data['usrs'] = $this->model->getUserToRequest($usrID);
 
+		$data['Department'] = $this->model->getAllDepartment();
+
 		if(isset($_REQUEST['btnAddRequest'])){
 
 			$vrq = $this->validation_request();
@@ -114,6 +116,8 @@ class Request extends Controllers {
 
 		$wherein = $_REQUEST['tdcheckbox'];
 
+		$data['Department'] = $this->model->getAllDepartment();
+
 		if($wherein != false){
 
 			$data['selectrequestdetail'] = $this->model->getDetail($wherein);
@@ -135,6 +139,8 @@ class Request extends Controllers {
 		$usrID = $this->helper->get_session("userId");
 
 		$data['usrs'] = $this->model->getUserToRequest($usrID);
+
+		$data['Department'] = $this->model->getAllDepartment();
 
 		$rq_id = false;
 

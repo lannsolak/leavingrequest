@@ -56,10 +56,10 @@ jQuery(function(){
 
     jQuery('.em-edit, .em-view').bind('click', function(){
         var action = jQuery(this).attr('data-action');
-        var formact = jQuery('.frm-action').attr('action');
-        var appendactoin = jQuery('.frm-action').attr('action', formact+action);
+        var formact = jQuery('.em-frm-action').attr('action');
+        var appendactoin = jQuery('.em-frm-action').attr('action', formact+action);
         var checkboxlength = jQuery('.tdcheckbox:checked').length;
-        if(checkboxlength > 0){            
+        if(checkboxlength > 0){          
           jQuery('.em-frm-action').submit();
         }else{
             alert("Please choose any checkbox in the list record before continue action...");
@@ -71,8 +71,8 @@ jQuery(function(){
 
     jQuery('.em-deleted').bind('click', function(){
         var action = jQuery(this).attr('data-action');
-        var formact = jQuery('.frm-action').attr('action');
-        var appendactoin = jQuery('.frm-action').attr('action', formact+action);
+        var formact = jQuery('.em-frm-action').attr('action');
+        var appendactoin = jQuery('.em-frm-action').attr('action', formact+action);
         var checkboxlength = jQuery('.tdcheckbox:checked').length;
         if(checkboxlength > 0){
           if(confirm("Are you sure to delete the employees?")){

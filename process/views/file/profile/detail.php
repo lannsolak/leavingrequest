@@ -8,7 +8,7 @@ if(isset($profileupdated)){
 }
 
 ?>
-
+<div class="table-responsive">
 <table class="table table-hover">
     <tbody>
         <?php 
@@ -19,7 +19,7 @@ if(isset($profileupdated)){
         ?>
         		<tr>
         			<td width="150">
-        				<img src="<?php echo BASE_URL; ?>picture/profile/<?php echo $user->user_photo; ?>" alt="profile picure" class="img-circle" style="width:100px;"/>
+        				<img src="<?php echo BASE_URL; ?>picture/profile/<?php echo $user->user_photo; ?>" alt="profile picure" class="img-circle img-thumbnail" style="width:100px;"/>
         			</td>
         			<td style="vertical-align:bottom !important;">
         				<p><?php echo ucfirst($user->user_fname.' '.$user->user_lname); ?></p>                                        				
@@ -66,3 +66,4 @@ if(isset($profileupdated)){
         ?>
     </tbody>
 </table>
+<div class="table-responsive">

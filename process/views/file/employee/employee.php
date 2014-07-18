@@ -14,6 +14,21 @@
         <div class="col-lg-9">
 
             <?php
+
+                if(isset($deleted)){
+
+                    if($deleted == 'success'){
+                        
+                        $this->display_alert_message('alert-success', "The records have been deleted successfully...");
+                    
+                    }else{
+
+                        $this->display_alert_message('alert-warning', "The processing failed to deleted the record...");
+
+                    }
+
+                }
+                
                 if(segment(1)){
             ?>
                 <div class="panel panel-default">

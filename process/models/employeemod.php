@@ -2,6 +2,23 @@
 	
 	class Employeemod extends Models{
 
+		public function getDetail($wherein){
+
+			$sql = "SELECT CONCAT(a.user_fname,' ',a.user_lname) AS 'ordinator',
+					       e.*, tbl_rud.*, tbl_department.dept_title, tbl_role.role_name  
+					FROM tbl_rud
+					RIGHT JOIN tbl_user e ON tbl_rud.tbl_user_user_id = e.user_id					
+					LEFT JOIN tbl_user a ON e.subordinateofuser = a.user_id
+					LEFT JOIN tbl_department ON tbl_rud.tbl_department_dept_id = tbl_department.dept_id
+					LEFT JOIN tbl_role ON tbl_rud.tbl_role_role_id = tbl_role.role_id
+					WHERE e.user_id IN (".implode(", ",$wherein).")";
+	
+			$record = $this->query($sql);
+
+			return $record;	
+
+		}
+
 		public function createEmployee($records, $filename){
 
 			if($records['emOrdinator'] == ''){
@@ -15,6 +32,32 @@
 			$this->execute($sql);
 
 			return mysql_insert_id();
+
+		}
+
+		public function updateEmployee($records, $filename, $emID){
+
+			if($records['emOrdinator'] == ''){
+				$records['emOrdinator'] = NULL;
+			}
+
+			$sql = "UPDATE tbl_user SET user_fname='".$records['txtfname']."', user_lname='".$records['txtlname']."', user_email='".$records['txtemail']."', user_photo='".$filename."', user_dob='".$records['txtdob']."', user_country='".$records['txtcountry']."', user_city='".$records['txtcity']."', user_phone='".$records['txtphone']."', user_address='".$records['txtaddress']."', user_experience='".$records['txtexperience']."', user_interest='".$records['txtinterest']."', subordinateofuser=' ".$records['emOrdinator']."' 
+
+			WHERE user_id=$emID";
+			
+			$this->execute($sql);
+
+			return mysql_affected_rows();
+
+		}
+
+		public function updateRud($emDeptID, $emRoleID, $emId){
+
+			$update = "UPDATE tbl_rud SET tbl_department_dept_id=$emDeptID, tbl_role_role_id=$emRoleID WHERE tbl_user_user_id =$emId";
+
+			$record = $this->execute($update);
+
+			return  mysql_affected_rows();
 
 		}
 
@@ -59,6 +102,26 @@
 
 		}
 
+		public function getEmployeeModify($em_id){
+
+			if($em_id != false){
+				foreach($em_id as $em){
+					$id = $em;
+				}
+			}else{
+				return null;
+			}
+
+			$sql = "SELECT *  
+					FROM tbl_rud INNER JOIN tbl_user e ON tbl_rud.tbl_user_user_id = e.user_id
+					WHERE e.user_id=$id AND e.user_deleted=0";
+	
+			$record = $this->query($sql);
+
+			return $record;		
+
+		}
+
 		public function getDepartment(){
 
 			$sql = "SELECT * FROM tbl_department WHERE dept_deleted=0";
@@ -94,13 +157,15 @@
 
 		}
 
+		public function deleteEmployee($em_id){
+
+			$update = "UPDATE tbl_user SET user_deleted=1 WHERE user_id IN ('%s')";
+
+			$record = $this->execute(sprintf($update, implode(',', $em_id)));
+
+			return  mysql_affected_rows();
+		}
+
 
 	}
-
-			// SELECT state,
-			//       ,COUNT(*) as cnt
-			//       ,SUM(sale_amount)          as sumSales
-			//       ,ROUND(AVG(sale_amount),0) as avgSales
-			//   FROM orders
-			//  GROUP BY state
 ?>
